@@ -17,6 +17,20 @@ async function run(){
 try{
     await client.connect();
     const serviceCollection = client.db('manufacture').collection('service');
+    const userCollection = client.db('manufacture').collection('users');
+
+    app.put('/user/:email', async(req, res) => {
+        const email = req.params.email;
+        const user = req.body;
+        const filter = {email: email};
+        const options = {upsert: true};
+        const updateDoc = {
+            $set: user,
+        };
+        const result = await userCollection.updateOne(filter, updateDoc, options);
+        res.send(result);
+
+    })
     
     app.get('/service', async(req, res)=> {
         const query = {};
