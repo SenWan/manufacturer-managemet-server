@@ -52,6 +52,10 @@ app.get('/', (req,res)=> {
     res.send('Running Manufacturer Management');
 });
 
+app.get('/hero',(req, res) => {
+    res.send('heroku starting');
+})
+
 app.listen(port, () => {
     console.log('listening to port', port);
 })
